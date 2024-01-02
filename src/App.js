@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import { AllRoutes } from './routes/AllRoutes';
+import { Header } from './components';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [data, setData] =useState([]);
+  const handleAdd = (product) => {
+    setData ([...data, product]);
+  }
+  const handleDelete = (index) => {
+    const newData = [...data];
+    newData.splice(index, 1);
+    console.log(newData);
+    setData(newData);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header data={data}/>
+      <AllRoutes handleAdd={handleAdd} data={data} handleDelete={handleDelete}/>
     </div>
   );
 }
